@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details Form</title>
+</head>
+<body>
+
+<h2>Student Details Form</h2>
+
+<form action="display.jsp" method="post">
+
+    Student ID:
+    <input type="text" name="id" required><br><br>
+
+    Student Name:
+    <input type="text" name="name" required><br><br>
+
+    Marks:
+    <input type="text" name="marks" required><br><br>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</form>
+
+</body>
+</html>
+
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%
+    String id = request.getParameter("id");
+    String name = request.getParameter("name");
+    String marks = request.getParameter("marks");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+</head>
+<body>
+
+<h2>Student Details</h2>
+
+<%
+    out.println("<b>Student ID:</b> " + id + "<br><br>");
+    out.println("<b>Student Name:</b> " + name + "<br><br>");
+    out.println("<b>Marks:</b> " + marks + "<br><br>");
+%>
+
+</body>
+</html>
