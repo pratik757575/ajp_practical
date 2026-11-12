@@ -1,0 +1,52 @@
+
+import java.util.*;
+import java.util.stream.*;
+
+class Employee
+{
+    int id;
+    String name;
+    double salary;
+
+    Employee(int id, String name, double salary)
+    {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    void display()
+    {
+        System.out.println(id + " " + name + " " + salary);
+    }
+}
+
+public class EmployeeManagement
+{
+    public static void main(String args[])
+    {
+        ArrayList<Employee> list = new ArrayList<Employee>();
+
+        list.add(new Employee(1, "Rahul", 25000));
+        list.add(new Employee(2, "Amit", 40000));
+        list.add(new Employee(3, "Sneha", 35000));
+        list.add(new Employee(4, "Priya", 50000));
+
+        System.out.println("Employee Details:");
+
+        list.forEach(e -> e.display());
+
+        System.out.println("\nSorted by Salary:");
+
+        list.stream()
+            .sorted((e1, e2) ->
+                Double.compare(e1.salary, e2.salary))
+            .forEach(e -> e.display());
+
+        System.out.println("\nEmployees with Salary Greater than 30000:");
+
+        list.stream()
+            .filter(e -> e.salary > 30000)
+            .forEach(e -> e.display());
+    }
+}
