@@ -1,0 +1,138 @@
+
+import java.util.*;
+
+class Student
+{
+    int id;
+    String name;
+    int marks;
+
+    Student(int id, String name, int marks)
+    {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    void display()
+    {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Marks: " + marks);
+        System.out.println("----------------");
+    }
+}
+
+public class StudentRecordManagement
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<Student> list = new ArrayList<Student>();
+
+        HashMap<Integer, Student> map =
+            new HashMap<Integer, Student>();
+
+        int choice;
+
+        do
+        {
+            System.out.println("\n1. Add Student");
+            System.out.println("2. Search Student");
+            System.out.println("3. Update Student");
+            System.out.println("4. Display Students");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch(choice)
+            {
+                case 1:
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+
+                    if(map.containsKey(id))
+                    {
+                        System.out.println("ID already exists");
+                        break;
+                    }
+
+                    sc.nextLine();
+
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+
+                    System.out.print("Enter Marks: ");
+                    int marks = sc.nextInt();
+
+                    Student s = new Student(id, name, marks);
+
+                    list.add(s);
+                    map.put(id, s);
+
+                    System.out.println("Student Added Successfully");
+                    break;
+
+                case 2:
+                    System.out.print("Enter ID to Search: ");
+                    int sid = sc.nextInt();
+
+                    if(map.containsKey(sid))
+                    {
+                        map.get(sid).display();
+                    }
+                    else
+                    {
+                        System.out.println("Student Not Found");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter ID to Update: ");
+                    int uid = sc.nextInt();
+
+                    if(map.containsKey(uid))
+                    {
+                        Student st = map.get(uid);
+
+                        sc.nextLine();
+
+                        System.out.print("Enter New Name: ");
+                        st.name = sc.nextLine();
+
+                        System.out.print("Enter New Marks: ");
+                        st.marks = sc.nextInt();
+
+                        System.out.println("Record Updated");
+                    }
+                    else
+                    {
+                        System.out.println("Student Not Found");
+                    }
+                    break;
+
+                case 4:
+                    Iterator<Student> itr = list.iterator();
+
+                    while(itr.hasNext())
+                    {
+                        Student st = itr.next();
+                        st.display();
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Thank You");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice");
+            }
+
+        } while(choice != 5);
+
+        sc.close();
+    }
+}
