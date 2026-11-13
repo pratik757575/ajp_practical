@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+</head>
+<body>
+
+<h2>Online Feedback Form</h2>
+
+<form action="FeedbackServlet" method="post">
+
+    Name:
+    <input type="text" name="name" required>
+    <br><br>
+
+    Email:
+    <input type="email" name="email" required>
+    <br><br>
+
+    Feedback:
+    <textarea name="feedback" required></textarea>
+    <br><br>
+
+    Rating:
+    <select name="rating">
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Average">Average</option>
+        <option value="Poor">Poor</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Submit Feedback">
+    <input type="reset" value="Reset">
+
+</form>
+
+</body>
+</html>
+
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/FeedbackServlet")
+public class FeedbackServlet extends HttpServlet
+{
+    @Override
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String feedback = request.getParameter("feedback");
+        String rating = request.getParameter("rating");
+
+        out.println("<html><body>");
+
+        out.println("<h2>Feedback Submitted Successfully</h2>");
+
+        out.println("<b>Name:</b> " + name + "<br><br>");
+        out.println("<b>Email:</b> " + email + "<br><br>");
+        out.println("<b>Feedback:</b> " + feedback + "<br><br>");
+        out.println("<b>Rating:</b> " + rating + "<br><br>");
+
+        out.println("</body></html>");
+
+        out.close();
+    }
+}
